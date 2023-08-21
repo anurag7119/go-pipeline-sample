@@ -1,0 +1,38 @@
+pipeline:
+  name: Demo-pipeline
+  identifier: Demopipeline
+  projectIdentifier: HarnessPracJuly
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: https://github.com/anurag7119/go-pipeline-sample.git
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: ubuntu
+                    shell: Sh
+                    command: Build
+                  description: Demo run
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
